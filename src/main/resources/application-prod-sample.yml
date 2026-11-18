@@ -1,0 +1,95 @@
+# 本地开发配置文件
+# @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+# @from <a href="https://codefather.cn">编程导航</a>
+spring:
+  # mysql 配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yu_ai_code_mother
+    username: root
+    password: ${DB_PASSWORD:}
+  # redis 配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      password: ${REDIS_PASSWORD:}
+      ttl: 3600
+
+# AI 配置 - 全部使用 DeepSeek
+langchain4j:
+  open-ai:
+    # 普通聊天模型
+    chat-model:
+      base-url: https://api.deepseek.com
+      api-key: ${DEEPSEEK_API_KEY:}
+      model-name: deepseek-chat
+      max-tokens: 8192
+      log-requests: true
+      log-responses: true
+    # 流式聊天模型
+    streaming-chat-model:
+      base-url: https://api.deepseek.com
+      api-key: ${DEEPSEEK_API_KEY:}
+      model-name: deepseek-chat
+      max-tokens: 8192
+      log-requests: true
+      log-responses: true
+    # 推理模型
+    reasoning-streaming-chat-model:
+      base-url: https://api.deepseek.com
+      api-key: ${DEEPSEEK_API_KEY:}
+      model-name: deepseek-chat
+      max-tokens: 8192
+      temperature: 0.1
+      log-requests: true
+      log-responses: true
+    # 路由模型 - 也使用 DeepSeek
+    routing-chat-model:
+      base-url: https://api.deepseek.com
+      api-key: ${DEEPSEEK_API_KEY:}
+      model-name: deepseek-chat
+      max-tokens: 100
+      log-requests: true
+      log-responses: true
+
+# 暂时禁用其他第三方服务
+# cos:
+#   client:
+#     host: localhost
+#     secretId: ${COS_SECRET_ID:}
+#     secretKey: ${COS_SECRET_KEY:}
+#     region: local
+#     bucket: local
+
+# 暂时禁用阿里云 DashScope
+# dashscope:
+#   api-key: ${DASHSCOPE_API_KEY:}
+#   image-model: disabled
+
+# 暂时禁用 Pexels
+# pexels:
+#   api-key: ${PEXELS_API_KEY:}
+
+# 生产环境关闭日志
+mybatis-flex:
+  configuration:
+    log-impl: ''
+
+# 接口文档配置
+knife4j:
+  basic:
+    enable: true
+    username: root
+    password: ${DOCS_PASSWORD:}
+
+# 部署路径
+code:
+  deploy-host: http://localhost:8123/dist
+
+# 日志配置
+logging:
+  level:
+    com.yupi.yuaicodemother: DEBUG
+    dev.langchain4j: DEBUG
